@@ -108,6 +108,32 @@ public class EmployeeController {
     }
 
     /**
+     * 根据ID查询员工
+     * @param id
+     * @return
+     */
+    @ApiOperation("根据ID查询员工")
+    @GetMapping("/{id}")
+    public Result<Employee> QueryById(@PathVariable Integer id){
+        log.info("根据id:{}来查询员工",id);
+        Employee employee = employeeService.QueryById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 修改员工信息
+     * @param employeeDTO
+     * @return
+     */
+    @ApiOperation("修改员工信息")
+    @PutMapping()
+    public Result Update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("修改员工信息：{}",employeeDTO);
+        employeeService.Update(employeeDTO);
+        return Result.success();
+    }
+
+    /**
      * 退出
      *
      * @return

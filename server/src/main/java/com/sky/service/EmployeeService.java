@@ -35,4 +35,17 @@ public interface EmployeeService {
      * @param status
      */
     void OpenOrDown(Integer status,Long id);
+
+    /**
+     * 根据ID查询员工
+     * @param id
+     * @return
+     */
+    Employee QueryById(Integer id);
+
+    /**
+     * 修改员工信息
+     * @param employeeDTO
+     */
+    void Update(EmployeeDTO employeeDTO);
 }
