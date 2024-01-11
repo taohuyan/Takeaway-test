@@ -94,6 +94,20 @@ public class EmployeeController {
     }
 
     /**
+     * 启用或禁用员工账号
+     * @param status
+     * @param id
+     * @return
+     */
+    @ApiOperation("启用或禁用员工账号")
+    @PostMapping("/status/{status}")
+    public Result OpenOrDown(@PathVariable Integer status,Long id){
+        log.info("启用或禁用员工账号：{}，{}",status,id);
+        employeeService.OpenOrDown(status,id);
+        return Result.success();
+    }
+
+    /**
      * 退出
      *
      * @return
