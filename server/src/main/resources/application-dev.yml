@@ -6,3 +6,6 @@ sky:
     database: Takeaway-test
     username: root
     password: root
+  alioss:
+    bucket-name: takeaway-test
+    endpoint: oss-cn-chengdu.aliyuncs.com
