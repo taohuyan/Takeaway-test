@@ -10,4 +10,21 @@
         values (#{name},#{categoryId},#{price},#{image},#{description},#{createTime},#{updateTime},
                 #{createUser},#{updateUser},#{status})
     </insert>
+
+    <select id="QueryByPage" resultType="com.sky.vo.DishVO">
+        select dish.*,c.name as categoryName from dish
+        inner join `takeaway-test`.category c on dish.category_id = c.id
+        <where>
+            <if test="name!=null">
+                and dish.name like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId!=null">
+                and c.category_id = #{categoryId}
+            </if>
+            <if test="status!=null">
+                and dish.status = #{status}
+            </if>
+        </where>
+        order by dish.create_time desc
+    </select>
 </mapper>
