@@ -114,6 +114,10 @@ public class DishServiceImpl implements DishService {
         return dishVO;
     }
 
+    /**
+     * 更新菜品及口味
+     * @param dishDTO
+     */
     @Override
     public void UpdateWithFlavor(DishDTO dishDTO) {
         //修改菜品的基本信息
