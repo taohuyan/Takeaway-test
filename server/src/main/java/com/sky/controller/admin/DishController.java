@@ -1,5 +1,6 @@
 package com.sky.controller.admin;
 
+import com.sky.annotation.RedisDelete;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
@@ -11,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishServiceImpl dishService;
+    @Autowired
+    private RedisTemplate redisTemplate;
     /**
      * 新增菜品
      * @param dishDTO
@@ -34,9 +38,11 @@ public class DishController {
      */
     @ApiOperation("新增菜品")
     @PostMapping()
+    @RedisDelete()
     public Result insert(@RequestBody DishDTO dishDTO){
         log.info("新增菜品:{}",dishDTO);
         dishService.insert(dishDTO);
+
         return Result.success();
     }
 
@@ -60,6 +66,7 @@ public class DishController {
      */
     @DeleteMapping
     @ApiOperation("删除菜品")
+    @RedisDelete()
     public Result Delete(@RequestParam List<Long> ids){
         log.info("删除菜品:{}",ids);
         dishService.DeleteBatch(ids);
@@ -86,6 +93,7 @@ public class DishController {
      */
     @PutMapping
     @ApiOperation("修改菜品数据")
+    @RedisDelete()
     public Result Update(@RequestBody DishDTO dishDTO){
         log.info("修改菜品信息");
         dishService.UpdateWithFlavor(dishDTO);
@@ -112,6 +120,7 @@ public class DishController {
      * @return
      */
     @PostMapping("/status/{status}")
+    @RedisDelete()
     public Result StartOrStop(@PathVariable Integer status,Long id){
         log.info("菜品起售停售");
         dishService.startOrStop(status,id);

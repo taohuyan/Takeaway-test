@@ -23,7 +23,7 @@ public class RedisConfiguration {
         //设置连接工厂对象
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         //设置redis key 的序列化器
-        redisTemplate.setDefaultSerializer(new Jackson2JsonRedisSerializer(Object.class));
+        //redisTemplate.setDefaultSerializer(new Jackson2JsonRedisSerializer(Object.class));
         //单独设置k的序列化
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         return redisTemplate;
